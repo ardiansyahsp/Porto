@@ -1,0 +1,44 @@
+{
+    "nav.projects": "Proyek",
+    "nav.skills": "Keahlian",
+    "nav.experience": "Pengalaman",
+    "nav.about": "Tentang",
+    "nav.search": "Cari dokumentasi",
+
+    "hero.greeting": "Hai, Saya",
+    "hero.name_line1": "Ardiansyah",
+    "hero.name_line2": "Sisworo Putra",
+    "hero.description": "Seorang Full-Stack Developer yang bersemangat dalam membangun aplikasi web, aplikasi mobile, dan solusi computer vision yang luar biasa.",
+    "hero.cta_primary": "Jelajahi Proyek Saya",
+    "hero.cta_secondary": "Unduh CV",
+
+    "strip.label": "TEKNOLOGI & TOOLS YANG SAYA GUNAKAN",
+
+    "transition.heading_line1": "Proyek Web, Mobile, dan Computer Vision",
+    "transition.heading_line2": "yang Telah Saya Bangun",
+
+    "projects.my": "Proyek",
+    "projects.title": "Saya",
+    "projects.description": "Saya telah menghabiskan bertahun-tahun membangun pengalaman digital di bidang web, mobile, dan AI/computer vision. Dengan lebih dari 6 proyek yang telah diselesaikan dan semangat untuk kode yang bersih, saya mewujudkan ide menjadi solusi yang elegan dan berperforma tinggi.",
+    "projects.view_button": "Lihat Proyek",
+
+    "grid.tab_all": "Semua",
+    "grid.tab_web": "Web",
+    "grid.tab_mobile": "Mobile",
+    "grid.tab_cv": "Computer Vision",
+
+    "footer.tagline": "Membangun produk web, mobile, dan computer vision.",
+    "footer.first_name": "Nama depan",
+    "footer.last_name": "Nama belakang",
+    "footer.email": "Alamat email",
+    "footer.hire_button": "Hubungi Saya",
+    "footer.disclaimer": "Dengan mengirim, Anda menyetujui syarat dan ketentuan kami.",
+    "footer.nav_title": "Navigasi",
+    "footer.nav_home": "Beranda",
+    "footer.nav_project": "Proyek",
+    "footer.nav_about": "Tentang",
+    "footer.nav_contact": "Kontak",
+    "footer.skills_title": "Teknologi",
+    "footer.connect_title": "Hubungi",
+    "footer.copyright": "© 2026 Ardiansyah Sisworo Putra. Hak cipta dilindungi."
+}

@@ -1,0 +1,44 @@
+{
+    "nav.projects": "Projects",
+    "nav.skills": "Skills",
+    "nav.experience": "Experience",
+    "nav.about": "About",
+    "nav.search": "Search docs",
+
+    "hero.greeting": "Hi, I'm",
+    "hero.name_line1": "Ardiansyah",
+    "hero.name_line2": "Sisworo Putra",
+    "hero.description": "A passionate Full-Stack Developer specializing in building exceptional web applications, mobile apps, and computer vision solutions.",
+    "hero.cta_primary": "Explore My Project",
+    "hero.cta_secondary": "Download CV",
+
+    "strip.label": "TECH STACK & TOOLS I'VE USED",
+
+    "transition.heading_line1": "Web, mobile, and Computer vision",
+    "transition.heading_line2": "Projects I've Built",
+
+    "projects.my": "My",
+    "projects.title": "Projects",
+    "projects.description": "I've spent years crafting digital experiences across web, mobile, and AI/computer vision domains. With over 6 projects delivered and a passion for clean code, I bring ideas to life through elegant and performant solutions.",
+    "projects.view_button": "View Project",
+
+    "grid.tab_all": "All",
+    "grid.tab_web": "Web",
+    "grid.tab_mobile": "Mobile",
+    "grid.tab_cv": "Computer Vision",
+
+    "footer.tagline": "Building web, mobile, and computer vision products.",
+    "footer.first_name": "First name",
+    "footer.last_name": "Last name",
+    "footer.email": "Email address",
+    "footer.hire_button": "Hire Me",
+    "footer.disclaimer": "By submitting, you agree to our terms and conditions.",
+    "footer.nav_title": "Navigations",
+    "footer.nav_home": "Home",
+    "footer.nav_project": "Project",
+    "footer.nav_about": "About",
+    "footer.nav_contact": "Contact",
+    "footer.skills_title": "Tech Stack",
+    "footer.connect_title": "Connect",
+    "footer.copyright": "© 2026 Ardiansyah Sisworo Putra. All rights reserved."
+}

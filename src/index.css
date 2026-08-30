@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-laravel: #FF2D20;
+  --color-laravel-dark: #E5261A;
+  --color-laravel-light: #FF4D42;
+  --color-body: #0B0B0B;
+  --color-muted: #6B7280;
+  --color-surface: #F8F8F7;
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-white, #fff);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Navbar scroll shadow */
+.navbar-scrolled {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Search modal backdrop */
+.search-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Project card hover effect */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+}
+
+/* Tab active state */
+.tab-active {
+  color: var(--color-laravel);
+  border-bottom: 2px solid var(--color-laravel);
+}
+
+/* Smooth transitions */
+.btn-transition {
+  transition: all 0.2s ease-in-out;
+}
+.btn-transition:hover {
+  transform: translateY(-1px);
+}
+.btn-transition:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-pulse-soft { animation: pulseSoft 3s ease-in-out infinite; }
+.hero-illustration { animation: float 6s ease-in-out infinite; }
+.dropdown-enter { animation: dropdownIn 0.15s ease-out forwards; }
+.animate-slideUp { animation: slideUp 0.6s ease-out forwards; }
+
+/* 3D Phone Mockup */
+.phone-stage { perspective: 1600px; position: relative; padding: 40px; }
+.phone-stage::after { content: ""; position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%) rotateX(70deg); width: 200px; height: 50px; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.2), transparent 70%); z-index: -1; }
+.phone-3d { position: relative; width: 260px; height: 540px; border-radius: 40px; background: #111; padding: 10px; box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.4), 0 15px 30px -10px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.1); transform-style: preserve-3d; transform: rotateX(8deg) rotateY(-22deg) rotateZ(4deg); transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.phone-3d:hover { transform: rotateX(4deg) rotateY(-12deg) rotateZ(2deg); }
+.phone-3d-notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 90px; height: 18px; background: #111; border-radius: 0 0 14px 14px; z-index: 2; }
+.phone-3d-screen { width: 100%; height: 100%; border-radius: 30px; overflow: hidden; background: linear-gradient(160deg, #16305e 0%, #1c3f7a 40%, #f2b705 100%); }
+.phone-3d-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Section Dividers */
+.section-divider-dots { position: relative; border: 1px dashed rgba(255, 45, 32, 0.35); border-radius: 2px; padding: 2rem 2rem; }
+.section-divider-dots::before, .section-divider-dots::after { content: ""; position: absolute; width: 7px; height: 7px; background-color: var(--color-laravel); border-radius: 1px; z-index: 1; }
+.section-divider-dots::before { top: -4px; left: -4px; box-shadow: calc(100% + 1px) 0 0 0 var(--color-laravel), 0 calc(100% + 1px) 0 0 var(--color-laravel), calc(100% + 1px) calc(100% + 1px) 0 0 var(--color-laravel); }
+
+/* Timeline Custom Styles */
+.tl-intro { height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+.tl-intro p { max-width: 32rem; color: #6b6b7a; line-height: 1.6; margin: 0 auto; }
+
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 1900px;
+  overflow: hidden;
+}
+.tl-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+#tlInk { fill: #17171c; }
+
+.tl-dot, .tl-marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #17171c;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.tl-marker {
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.tl-marker.is-reached { transform: translate(-50%, -50%) scale(1); }
+
+.tl-pen {
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  transform: translate(-50%, -85%) rotate(0deg);
+  transform-origin: 50% 85%;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,.15));
+  z-index: 6;
+}
+.tl-pen svg { display: block; width: 100%; height: 100%; }
+
+.tl-item {
+  position: absolute;
+  width: 320px;
+  background: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  border: 1px solid #eaeaea;
+  transform: translate(0, -50%) translateY(15px);
+  opacity: 0;
+  transition: opacity .5s ease, transform .5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+.tl-item.is-visible {
+  opacity: 1;
+  transform: translate(0, -50%) translateY(0);
+  pointer-events: auto;
+}
+.tl-item .year { font-size: 1.4rem; font-weight: 800; color: #1a1a2e; margin: 0 0 .4rem; }
+.tl-item .role { font-size: 0.95rem; color: #444; margin: 0; line-height: 1.45; }
+.tl-item .role b { color: #1a1a2e; }

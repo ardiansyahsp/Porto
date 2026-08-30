@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ardiansyah Sisworo Putra — Full-Stack Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white text-body">
+    <!-- Navbar -->
+    <nav id="navbar" class="sticky top-0 z-50 bg-white border-b border-border-light transition-shadow duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Left: Logo -->
+                <div class="flex items-center gap-2 shrink-0">
+                    <a href="#" class="flex items-center gap-2.5 group">
+                        <svg class="w-8 h-8" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 2L32 12L18 34L4 12L18 2Z" fill="#FF2D20"/>
+                            <path d="M18 2L32 12L18 18L4 12L18 2Z" fill="#FF4D42"/>
+                            <path d="M18 18L32 12L18 34Z" fill="#E5261A"/>
+                        </svg>
+                        <span class="font-bold text-lg text-body tracking-tight">Ardiansyah</span>
+                    </a>
+                </div>
+
+                <!-- Center: Nav Links -->
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="#projects" class="relative px-3 py-2 text-sm font-medium text-muted hover:text-body transition-colors flex items-center gap-1">
+                        <span data-i18n="nav.projects">Projects</span>
+                    </a>
+                    <a href="#skills" class="relative px-3 py-2 text-sm font-medium text-muted hover:text-body transition-colors flex items-center gap-1">
+                        <span data-i18n="nav.skills">Skills</span>
+                    </a>
+                    <a href="#experience" class="relative px-3 py-2 text-sm font-medium text-muted hover:text-body transition-colors flex items-center gap-1">
+                        <span data-i18n="nav.experience">Experience</span>
+                    </a>
+                    <a href="#about" class="relative px-3 py-2 text-sm font-medium text-muted hover:text-body transition-colors flex items-center gap-1">
+                        <span data-i18n="nav.about">About</span>
+                    </a>
+                </div>
+
+                <!-- Right: Actions -->
+                <div class="flex items-center gap-3">
+                    <a href="https://github.com/ardiansyahsp" target="_blank" class="hidden sm:flex items-center justify-center w-9 h-9 rounded-lg text-muted hover:text-body hover:bg-surface transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+
+                    <!-- Language Toggle -->
+                    <div class="relative">
+                        <button id="lang-toggle" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-muted hover:text-body border border-border rounded-lg hover:bg-surface transition-colors">
+                            <span id="lang-toggle-text">ENG</span>
+                            <svg class="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="lang-dropdown" class="dropdown-panel hidden absolute right-0 mt-2 w-28 bg-white border border-border rounded-lg shadow-lg overflow-hidden">
+                            <button id="lang-btn-en" class="w-full text-left px-4 py-2 text-sm hover:bg-surface transition-colors font-semibold text-laravel">English</button>
+                            <button id="lang-btn-id" class="w-full text-left px-4 py-2 text-sm hover:bg-surface transition-colors text-muted">Indonesia</button>
+                        </div>
+                    </div>
+
+                    <button id="search-trigger" class="hidden md:flex items-center gap-3 px-3 py-1.5 text-sm text-muted border border-border rounded-lg hover:bg-surface transition-colors w-52">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <span class="flex-1 text-left truncate" data-i18n="nav.search">Search docs</span>
+                        <kbd class="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-muted bg-surface rounded border border-border">⌘K</kbd>
+                    </button>
+
+                    <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg text-muted hover:text-body hover:bg-surface transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-border-light bg-white">
+            <div class="px-4 py-4 space-y-1">
+                <a href="#projects" class="block px-3 py-2 text-sm font-medium text-muted hover:text-body hover:bg-surface rounded-lg" data-i18n="nav.projects">Projects</a>
+                <a href="#skills" class="block px-3 py-2 text-sm font-medium text-muted hover:text-body hover:bg-surface rounded-lg" data-i18n="nav.skills">Skills</a>
+                <a href="#experience" class="block px-3 py-2 text-sm font-medium text-muted hover:text-body hover:bg-surface rounded-lg" data-i18n="nav.experience">Experience</a>
+                <a href="#about" class="block px-3 py-2 text-sm font-medium text-muted hover:text-body hover:bg-surface rounded-lg" data-i18n="nav.about">About</a>
+                <div class="flex items-center gap-2 pt-3 border-t border-border-light">
+                    <button id="mob-lang-toggle" class="px-3 py-1.5 text-sm font-medium text-muted border border-border rounded-lg hover:bg-surface">
+                        Switch to Indonesia
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-white">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                <!-- Left Column -->
+                <div class="lg:col-span-7 space-y-6" style="animation: slideUp 0.6s ease-out forwards;">
+                    <p class="text-sm font-semibold text-laravel tracking-wide uppercase" data-i18n="hero.greeting">Hi, I'm</p>
+
+                    <h1 class="text-5xl sm:text-6xl lg:text-[64px] font-normal text-body leading-[1.05] tracking-tight">
+                        <span data-i18n="hero.name_line1">Ardiansyah</span><br>
+                        <span class="text-body" data-i18n="hero.name_line2">Sisworo Putra</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-muted max-w-lg leading-relaxed" data-i18n="hero.description">
+                        A passionate Full-Stack Developer specializing in building exceptional web applications, mobile apps, and computer vision solutions.
+                    </p>
+
+                    <div class="flex items-center gap-4 pt-2">
+                        <a href="#projects" class="btn-transition inline-flex items-center gap-2 px-6 py-3 bg-laravel hover:bg-laravel-dark text-white text-sm font-semibold rounded-lg shadow-sm shadow-laravel/20">
+                            <span data-i18n="hero.cta_primary">Explore My Project</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                        <a href="#" class="btn-transition inline-flex items-center gap-2 px-6 py-3 border border-border text-body text-sm font-semibold rounded-lg hover:bg-surface">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            <span data-i18n="hero.cta_secondary">Download CV</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Isometric Illustration -->
+                <div class="lg:col-span-5 flex justify-center" style="animation: fadeIn 0.8s ease-out 0.3s both;">
+                    <div class="relative w-full max-w-md">
+                        <img src="images/hero-illustration.png" alt="Isometric illustration" class="w-full h-auto hero-illustration">
+                        <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-laravel animate-pulse-soft"></span>
+                                <span class="w-8 h-[2px] bg-border rounded-full"></span>
+                                <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse-soft" style="animation-delay: 0.5s"></span>
+                                <span class="w-12 h-[2px] bg-border rounded-full"></span>
+                                <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse-soft" style="animation-delay: 1s"></span>
+                                <span class="w-8 h-[2px] bg-border rounded-full"></span>
+                                <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse-soft" style="animation-delay: 1.5s"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashed Line -->
+    <div class="section-line"><div class="section-line-inner"></div></div>
+
+    <!-- Logo/Tech Stack Strip -->
+    <section id="skills" class="bg-surface border-y border-border-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <p class="text-xs font-bold tracking-wider text-muted uppercase whitespace-nowrap shrink-0" data-i18n="strip.label">
+                    TECH STACK & TOOLS I'VE USED
+                </p>
+                <div class="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide w-full justify-center lg:justify-start">
+                    <!-- Tech Logos (simplified for brevity, retaining Laravel and Flutter as examples, but others just names if SVGs are too long) -->
+                    <!-- Laravel -->
+                    <div class="flex items-center shrink-0">
+                        <svg class="h-7 w-auto" viewBox="0 0 50 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M49.626 11.564a.809.809 0 01.028.209v10.972a.8.8 0 01-.402.694l-9.209 5.302V39.25c0 .286-.152.55-.4.694L20.42 51.01c-.044.025-.092.041-.14.058-.018.006-.035.017-.054.022a.805.805 0 01-.41 0c-.022-.006-.042-.018-.063-.026-.044-.016-.09-.03-.132-.054L.402 39.944A.801.801 0 010 39.25V6.334c0-.072.01-.142.028-.21.006-.023.02-.044.028-.067.015-.042.029-.085.051-.124.015-.026.037-.047.055-.071.023-.032.044-.065.071-.093.02-.019.047-.033.07-.05.03-.024.056-.052.088-.072h.001L9.825.062a.8.8 0 01.8 0l9.534 5.502h.002c.032.02.058.048.087.072.024.017.05.03.07.05.027.027.048.06.07.092.02.025.042.046.057.072.022.04.036.082.05.124.01.023.022.044.029.067a.82.82 0 01.027.21v20.568l8.03-4.627V11.772c0-.071.01-.141.028-.208.007-.024.02-.045.028-.068.016-.042.03-.085.052-.124.014-.026.036-.047.054-.071.024-.032.044-.065.072-.093.02-.019.047-.033.069-.05.031-.024.057-.052.089-.072h0l9.534-5.5a.801.801 0 01.8 0l9.534 5.5c.032.02.058.05.088.073.023.017.05.03.07.05.027.027.048.06.07.092.02.025.041.046.056.072.022.039.036.082.051.124.009.023.022.044.028.068zm-1.574 10.636V12.89l-3.375 1.944-4.655 2.682v9.311l8.03-4.627zm-9.534 16.376V29.27l-4.58 2.618-12.985 7.418v9.403l17.565-10.132zM1.604 7.27v31.529L19.17 48.93v-9.404l-9.2-5.194-.006-.004-.007-.003c-.03-.018-.056-.046-.086-.068-.022-.018-.048-.033-.068-.054l-.003-.003c-.025-.027-.044-.06-.067-.09-.018-.025-.04-.048-.054-.074l-.002-.005c-.019-.04-.03-.083-.044-.127-.011-.023-.023-.044-.03-.069a.799.799 0 01-.025-.207V13.853l-4.654-2.682L1.604 7.27zm8.822-5.594L2.395 6.334l8.03 4.627 8.03-4.627-8.029-4.658zm4.252 34.293L19.332 33v-9.31L15.957 25.6l-4.655 2.682v8.286h.001zm17.908-22.51l-8.029 4.626 8.03 4.627 8.029-4.627-8.03-4.627zm-.4 10.19l-4.655-2.682-3.376-1.944v9.31l4.655 2.683 3.376 1.944v-9.31zm-18.31 15.494l11.738-6.705 5.824-3.327-8.024-4.623-9.207 5.302-8.354 4.816 8.023 4.537z" fill="#FF2D20"/>
+                        </svg>
+                    </div>
+                    <div class="w-px h-8 bg-border shrink-0"></div>
+                    <!-- Flutter -->
+                    <div class="flex items-center shrink-0">
+                        <svg class="h-7 w-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.314 0L2.3 12 6.13 15.83 22.143 0H14.314zM14.314 11.908L7.244 18.98l4.028 4.028 3.058-3.058 7.813-7.812L14.314 11.908z" fill="#02569B"/>
+                            <path d="M7.244 18.98l3.514-3.514 3.556 3.514-3.514 3.514L7.244 18.98z" fill="#45D1FD"/>
+                        </svg>
+                    </div>
+                    <div class="w-px h-8 bg-border shrink-0"></div>
+                    <!-- Apple -->
+                    <div class="flex items-center shrink-0">
+                        <svg class="h-7 w-auto" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                    </div>
+                    <div class="w-px h-8 bg-border shrink-0"></div>
+                    <!-- Webflow -->
+                    <div class="flex items-center shrink-0">
+                        <svg class="h-6 w-auto" viewBox="0 0 24 24" fill="#4353FF" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.803 7.727c0 0-2.225 6.784-2.372 7.227-.166-.55-2.764-9.227-2.764-9.227-2.476 0-3.742 1.713-4.428 3.512 0 0-1.656 4.46-1.778 4.8-.015-.4-.395-5.812-.395-5.812C5.91 6.184 3.666 5.727 2.4 5.727L5.046 18.273c2.598-.007 3.93-1.695 4.633-3.478 0 0 1.455-3.88 1.517-4.064.124.41 2.403 7.542 2.403 7.542 2.605 0 3.93-1.674 4.647-3.472L22 5.727c-2.143 0-3.565 1.333-4.197 2z"/>
+                        </svg>
+                    </div>
+                    <div class="w-px h-8 bg-border shrink-0"></div>
+                    <!-- Firebase -->
+                    <div class="flex items-center shrink-0">
+                        <svg class="h-7 w-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.89 15.672L6.256 2.084a.467.467 0 01.867-.166l2.508 4.703L3.89 15.672z" fill="#FFA000"/>
+                            <path d="M20.11 18.188L17.754 3.746a.467.467 0 00-.822-.205l-13.042 14.647 7.398 4.271a1.402 1.402 0 001.422 0l7.4-4.271z" fill="#F57C00"/>
+                            <path d="M9.63 6.621l-2.4 4.49 2.4 4.49L3.89 15.672 9.631 6.62z" fill="#FFCA28"/>
+                            <path d="M20.11 18.188L17.754 3.746a.467.467 0 00-.822-.205l-7.3 3.08 4.147 9.18 6.33 2.387z" fill="#F57C00"/>
+                            <path d="M20.11 18.188l-6.33-2.387-4.15 2.658 1.66 3.998a1.402 1.402 0 001.422 0l7.4-4.27z" fill="#FFA000"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashed Line -->
+    <div class="section-line"><div class="section-line-inner"></div></div>
+
+    <!-- Section Heading -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="section-divider-dots flex flex-col items-center justify-center text-center py-10 sm:py-16">
+            <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-normal text-body leading-tight tracking-tight">
+                <span class="block text-muted" data-i18n="transition.heading_line1">Web, mobile, and Computer vision</span>
+                <span class="block font-semibold mt-1" data-i18n="transition.heading_line2">Projects I've Built</span>
+            </h2>
+        </div>
+    </div>
+
+    <!-- Dashed Line -->
+    <div class="section-line"><div class="section-line-inner"></div></div>
+
+    <!-- Projects Highlight -->
+    <section id="projects">
+        <div class="bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+                    <div class="space-y-6">
+                        <h2 class="text-7xl sm:text-8xl lg:text-[96px] font-normal text-body leading-[0.95] tracking-tighter">
+                            <span data-i18n="projects.my">My</span><br>
+                            <span data-i18n="projects.title">Projects</span>
+                        </h2>
+                        <p class="text-base sm:text-lg text-muted leading-relaxed max-w-md" data-i18n="projects.description">
+                            I've spent years crafting digital experiences across web, mobile, and AI/computer vision domains. With over 6 projects delivered and a passion for clean code, I bring ideas to life through elegant and performant solutions.
+                        </p>
+                        <a href="#project-grid" class="btn-transition inline-flex items-center gap-2 px-6 py-3 bg-laravel hover:bg-laravel-dark text-white text-sm font-semibold rounded-lg shadow-sm shadow-laravel/20">
+                            <span data-i18n="projects.view_button">View Project</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                    <div class="flex justify-center lg:justify-end">
+                        <div class="phone-stage">
+                            <div class="phone-3d">
+                                <div class="phone-3d-notch"></div>
+                                <div class="phone-3d-screen">
+                                    <img src="images/phone-mockup.png" alt="Mobile app project">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashed Line -->
+    <div class="section-line"><div class="section-line-inner"></div></div>
+
+    <!-- Project Grid -->
+    <section id="project-grid" class="bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            <!-- Tab Filter -->
+            <div class="flex items-center gap-1 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+                <button data-tab="all" class="tab-active text-laravel shrink-0 px-4 py-2 text-sm font-semibold rounded-lg transition-colors hover:bg-white">
+                    <span data-i18n="grid.tab_all">All</span>
+                    <span class="ml-1.5 px-1.5 py-0.5 text-[10px] font-bold bg-laravel/10 text-laravel rounded-md">6</span>
+                </button>
+                <button data-tab="web" class="text-muted shrink-0 px-4 py-2 text-sm font-semibold rounded-lg transition-colors hover:bg-white">
+                    <span data-i18n="grid.tab_web">Web</span>
+                    <span class="ml-1.5 px-1.5 py-0.5 text-[10px] font-bold bg-surface text-muted rounded-md">5</span>
+                </button>
+                <button data-tab="mobile" class="text-muted shrink-0 px-4 py-2 text-sm font-semibold rounded-lg transition-colors hover:bg-white">
+                    <span data-i18n="grid.tab_mobile">Mobile</span>
+                    <span class="ml-1.5 px-1.5 py-0.5 text-[10px] font-bold bg-surface text-muted rounded-md">1</span>
+                </button>
+                <button data-tab="computer_vision" class="text-muted shrink-0 px-4 py-2 text-sm font-semibold rounded-lg transition-colors hover:bg-white">
+                    <span data-i18n="grid.tab_cv">Computer Vision</span>
+                    <span class="ml-1.5 px-1.5 py-0.5 text-[10px] font-bold bg-surface text-muted rounded-md">0</span>
+                </button>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Project 1 -->
+                <div class="project-card rounded-xl border border-border bg-white overflow-hidden group" data-category="web">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-surface">
+                        <img src="images/projects/flight-ticket.png" alt="Flight Ticket" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-50 text-blue-600">Web</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">Flight Ticket App Travel Website</h3>
+                        <p class="mt-1 text-sm text-muted">Web Development</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card rounded-xl border border-border bg-white overflow-hidden group" data-category="web">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-surface">
+                        <img src="images/projects/nike-ecommerce.png" alt="Nike E-Commerce" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-50 text-blue-600">Web</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">Nike E-Commerce</h3>
+                        <p class="mt-1 text-sm text-muted">Web Development</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card rounded-xl border border-border bg-white overflow-hidden group" data-category="web">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-surface">
+                        <img src="images/projects/phone-accessories.png" alt="Phone Accessories" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-50 text-blue-600">Web</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">Phone Accessories Coreit</h3>
+                        <p class="mt-1 text-sm text-muted">Web Development</p>
+                    </div>
+                </div>
+                <!-- Project 4 (Wide) -->
+                <div class="md:col-span-2 project-card rounded-xl border border-border bg-white overflow-hidden group" data-category="web">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-surface">
+                        <img src="images/projects/typicall-crm.svg" alt="Typicall CRM" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-50 text-blue-600">Web</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">Typicall - CRM Automation Platform</h3>
+                        <p class="mt-1 text-sm text-muted">Web Development</p>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="project-card rounded-xl border border-border bg-white overflow-hidden group" data-category="web">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-surface">
+                        <img src="images/projects/tips-games.png" alt="Tips Bermain Games" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-50 text-blue-600">Web</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">Tips Bermain Games - Blog</h3>
+                        <p class="mt-1 text-sm text-muted">Web Development</p>
+                    </div>
+                </div>
+                <!-- Project 6 -->
+                <div class="project-card rounded-xl border border-border bg-white overflow-hidden group" data-category="mobile">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-surface">
+                        <img src="images/projects/typicall-flutter.svg" alt="Typicall Flutter" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md bg-purple-50 text-purple-600">Mobile</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">Typicall - Clone Flutter App</h3>
+                        <p class="mt-1 text-sm text-muted">Mobile Development</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashed Line -->
+    <div class="section-line"><div class="section-line-inner"></div></div>
+
+    <!-- Timeline -->
+    <section id="timeline" class="w-full relative bg-surface border-y border-border">
+        <div class="tl-intro">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-body mb-4">Timeline & Journey</h2>
+                <p class="text-muted text-center max-w-lg mx-auto">Scroll ke bawah untuk melihat perjalanan karir dan pendidikan.</p>
+            </div>
+        </div>
+
+        <div class="tl-wrap" id="tlWrap">
+          <div class="tl-sticky">
+            <svg class="tl-svg" viewBox="0 0 400 1200" preserveAspectRatio="xMidYMin slice">
+              <path class="tl-path-bg" d="M 200 40 C 340 100, 350 240, 280 360 C 210 480, 70 520, 100 680 C 130 840, 270 870, 310 820 C 350 770, 330 710, 280 720 C 230 730, 200 800, 230 880 C 270 1000, 260 1080, 250 1140" />
+              <path id="tlPath" class="tl-path" d="M 200 40 C 340 100, 350 240, 280 360 C 210 480, 70 520, 100 680 C 130 840, 270 870, 310 820 C 350 770, 330 710, 280 720 C 230 730, 200 800, 230 880 C 270 1000, 260 1080, 250 1140" />
+              <circle class="tl-marker" id="tlMarker0" r="10" />
+              <circle class="tl-marker" id="tlMarker1" r="10" />
+              <circle class="tl-marker" id="tlMarker2" r="10" />
+              <circle id="tlDot" class="tl-dot" r="7" />
+            </svg>
+
+            <div class="tl-item" data-at="0.10" style="top: 6%;">
+              <p class="year">2024</p>
+              <p class="role">Mulai kuliah <b>Informatika</b></p>
+            </div>
+            <div class="tl-item" data-at="0.42" style="top: 40%;">
+              <p class="year">2025</p>
+              <p class="role">Membangun <b>MoneyTrek</b> & <b>ngePet</b></p>
+            </div>
+            <div class="tl-item" data-at="0.72" style="top: 72%;">
+              <p class="year">2026</p>
+              <p class="role">Magang & proyek <b>Computer Vision</b></p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Dashed Line -->
+    <div class="section-line"><div class="section-line-inner"></div></div>
+
+    <!-- Footer -->
+    <footer id="about" class="bg-white border-t border-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+                <!-- Left: Logo, Tagline, Contact Form -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2.5">
+                            <svg class="w-8 h-8" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 2L32 12L18 34L4 12L18 2Z" fill="#FF2D20"/>
+                                <path d="M18 2L32 12L18 18L4 12L18 2Z" fill="#FF4D42"/>
+                                <path d="M18 18L32 12L18 34Z" fill="#E5261A"/>
+                                <path d="M4 12L18 18L18 34Z" fill="#CC1F15"/>
+                            </svg>
+                            <span class="font-bold text-lg text-body">Ardiansyah</span>
+                        </div>
+                        <p class="text-sm font-semibold text-laravel" data-i18n="footer.tagline">
+                            Building web, mobile, and computer vision products.
+                        </p>
+                    </div>
+
+                    <form class="space-y-3" action="#" method="POST">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" data-i18n-placeholder="footer.first_name" placeholder="First name" class="w-full px-4 py-2.5 text-sm border border-border rounded-lg bg-white text-body placeholder-muted focus:outline-none focus:ring-2 focus:ring-laravel/20">
+                            <input type="text" data-i18n-placeholder="footer.last_name" placeholder="Last name" class="w-full px-4 py-2.5 text-sm border border-border rounded-lg bg-white text-body placeholder-muted focus:outline-none focus:ring-2 focus:ring-laravel/20">
+                        </div>
+                        <input type="email" data-i18n-placeholder="footer.email" placeholder="Email address" class="w-full px-4 py-2.5 text-sm border border-border rounded-lg bg-white text-body placeholder-muted focus:outline-none focus:ring-2 focus:ring-laravel/20">
+                        <button type="submit" class="btn-transition w-full px-6 py-3 bg-laravel hover:bg-laravel-dark text-white text-sm font-semibold rounded-lg shadow-sm shadow-laravel/20">
+                            <span data-i18n="footer.hire_button">Hire Me</span>
+                        </button>
+                        <p class="text-xs text-muted" data-i18n="footer.disclaimer">
+                            By submitting, you agree to our terms and conditions.
+                        </p>
+                    </form>
+
+                    <div class="flex items-center gap-3">
+                        <a href="https://github.com/ardiansyahsp" target="_blank" class="flex items-center justify-center w-10 h-10 rounded-full border border-border text-muted hover:text-body hover:border-body transition-colors">
+                            <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Links -->
+                <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:pl-12">
+                    <div>
+                        <h4 class="text-xs font-bold tracking-wider text-body uppercase mb-4" data-i18n="footer.nav_title">Navigations</h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors"><span data-i18n="footer.nav_home">Home</span></a></li>
+                            <li><a href="#projects" class="text-sm text-muted hover:text-body transition-colors"><span data-i18n="footer.nav_project">Project</span></a></li>
+                            <li><a href="#about" class="text-sm text-muted hover:text-body transition-colors"><span data-i18n="footer.nav_about">About</span></a></li>
+                            <li><a href="#about" class="text-sm text-muted hover:text-body transition-colors"><span data-i18n="footer.nav_contact">Contact</span></a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold tracking-wider text-body uppercase mb-4" data-i18n="footer.skills_title">Tech Stack</h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Laravel</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Flutter</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">React / Next.js</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Python / TensorFlow</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Firebase</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Tailwind CSS</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold tracking-wider text-body uppercase mb-4" data-i18n="footer.connect_title">Connect</h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="https://github.com/ardiansyahsp" target="_blank" class="text-sm text-muted hover:text-body transition-colors">GitHub</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">LinkedIn</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Email</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-body transition-colors">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-border-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+                <p class="text-xs text-muted text-center sm:text-left" data-i18n="footer.copyright">
+                    © 2026 Ardiansyah Sisworo Putra. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="hidden fixed inset-0 z-[100] items-center justify-center search-overlay">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
+            <div class="flex items-center border-b border-border px-4 py-3">
+                <svg class="w-5 h-5 text-muted mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                <input id="search-input" type="text" data-i18n-placeholder="nav.search" placeholder="Search docs..." class="flex-1 text-sm outline-none bg-transparent text-body placeholder-muted">
+                <kbd class="hidden sm:inline-flex items-center px-2 py-0.5 text-xs text-muted bg-surface rounded border border-border ml-2">ESC</kbd>
+            </div>
+            <div class="px-4 py-8 text-center text-sm text-muted">
+                Start typing to search...
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/i18n.js"></script>
+</body>
+</html>
