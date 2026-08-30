@@ -1,7 +1,13 @@
-import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
+import en from '../data/lang/en.json';
+import id from '../data/lang/id.json';
 
 type LangType = 'en' | 'id';
-type Translations = Record<string, string>;
+
+const translationsMap = {
+  en,
+  id,
+};
 
 interface LanguageContextProps {
   lang: LangType;
@@ -16,19 +22,6 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [lang, setLangState] = useState<LangType>(
     (localStorage.getItem('portfolio_lang') as LangType) || 'en'
   );
-  const [translations, setTranslations] = useState<Translations>({});
-
-  useEffect(() => {
-    const loadTranslations = async () => {
-      try {
-        const mod = await import(`../data/lang/${lang}.json`);
-        setTranslations(mod.default);
-      } catch (error) {
-        console.error('Failed to load translations:', error);
-      }
-    };
-    loadTranslations();
-  }, [lang]);
 
   const setLang = (newLang: LangType) => {
     setLangState(newLang);
@@ -40,7 +33,10 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   const t = (key: string): string => {
-    return translations[key] || key;
+    const translations = translationsMap[lang];
+    // Cast translations to Record<string, string> or any to avoid TS index errors
+    const value = (translations as Record<string, string>)[key];
+    return value || key;
   };
 
   return (
@@ -57,3 +53,4 @@ export const useLanguage = () => {
   }
   return context;
 };
+
