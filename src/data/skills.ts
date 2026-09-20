@@ -1,8 +1,6 @@
-export interface Skill {
-  id: string;
-  name: string;
-  svg: string;
-}
+import type { Skill } from '@/types';
+
+export type { Skill } from '@/types';
 
 export const skills: Skill[] = [
   {

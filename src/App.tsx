@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Navbar } from './components/layout/Navbar'
-import { Footer } from './components/layout/Footer'
-import { Hero } from './components/sections/Hero'
-import { Skills } from './components/sections/Skills'
-import { Projects } from './components/sections/Projects'
-import { Timeline } from './components/sections/Timeline'
-import { SearchModal } from './components/ui/SearchModal'
-import { SectionDivider } from './components/ui/SectionDivider'
+import { Navbar } from '@/components/layout'
+import { Footer } from '@/components/layout'
+import { Hero } from '@/components/sections'
+import { Skills } from '@/components/sections'
+import { Projects } from '@/components/sections'
+import { Timeline } from '@/components/sections'
+import { SearchModal } from '@/components/ui'
+import { SectionDivider } from '@/components/ui'
 
 function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)

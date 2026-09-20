@@ -1,14 +1,6 @@
-export type Category = 'web' | 'mobile' | 'computer_vision';
+import type { Project } from '@/types';
 
-export interface Project {
-  id: string;
-  title: string;
-  category: Category;
-  categoryLabel: string;
-  description: string;
-  image: string;
-  wide?: boolean;
-}
+export type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
@@ -16,48 +8,54 @@ export const projects: Project[] = [
     title: 'Flight Ticket App Travel Website',
     category: 'web',
     categoryLabel: 'Web',
-    description: 'Web Development',
-    image: '/images/projects/flight-ticket.png'
+    description: 'Aplikasi pemesanan tiket pesawat dengan antarmuka yang responsif.',
+    image: '/images/projects/flight-ticket.png',
+    techStack: ['Laravel', 'React', 'Tailwind']
   },
   {
     id: 'nike-ecommerce',
     title: 'Nike E-Commerce',
     category: 'web',
     categoryLabel: 'Web',
-    description: 'Web Development',
-    image: '/images/projects/nike-ecommerce.png'
+    description: 'Katalog produk dan sistem keranjang belanja interaktif.',
+    image: '/images/projects/nike-ecommerce.png',
+    techStack: ['Vue.js', 'Node.js', 'MySQL']
   },
   {
     id: 'phone-accessories',
     title: 'Phone Accessories Coreit',
     category: 'web',
     categoryLabel: 'Web',
-    description: 'Web Development',
-    image: '/images/projects/phone-accessories.png'
+    description: 'Platform penjualan aksesoris gawai terintegrasi.',
+    image: '/images/projects/phone-accessories.png',
+    techStack: ['WordPress', 'Apache', 'MySQL']
   },
   {
     id: 'typicall-crm',
     title: 'Typicall - CRM Automation Platform',
     category: 'web',
     categoryLabel: 'Web',
-    description: 'Web Development',
+    description: 'Dashboard analitik dan otomatisasi manajemen pelanggan.',
     image: '/images/projects/typicall-crm.svg',
-    wide: true
+    wide: true,
+    techStack: ['Laravel', 'React', 'REST API']
   },
   {
     id: 'tips-games',
     title: 'Tips Bermain Games - Blog',
     category: 'web',
     categoryLabel: 'Web',
-    description: 'Web Development',
-    image: '/images/projects/tips-games.png'
+    description: 'Portal artikel dan panduan bermain game.',
+    image: '/images/projects/tips-games.png',
+    techStack: ['Next.js', 'Tailwind', 'Markdown']
   },
   {
     id: 'typicall-flutter',
     title: 'Typicall - Clone Flutter App',
     category: 'mobile',
     categoryLabel: 'Mobile',
-    description: 'Mobile Development',
-    image: '/images/projects/typicall-flutter.svg'
+    description: 'Aplikasi mobile lintas platform untuk manajemen data.',
+    image: '/images/projects/typicall-flutter.svg',
+    techStack: ['Flutter', 'Dart', 'Firebase']
   }
 ];

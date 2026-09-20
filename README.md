@@ -1,32 +1,50 @@
-# React + TypeScript + Vite
+# Ardiansyah's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, full-stack developer portfolio built with React, Vite, and Tailwind CSS. 
 
-Currently, two official plugins are available:
+## Features
+- Fully responsive modern design
+- i18n support (English & Indonesian)
+- Dynamic timeline and project filtering
+- Built-in type safety with TypeScript
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Project Structure
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```text
+webPorto/
+├── public/                 # Static assets (images, icons) - URLs are mapped to /
+├── src/
+│   ├── components/         # React components organized by scope
+│   │   ├── layout/         # Header, Footer, etc.
+│   │   ├── sections/       # Main page sections (Hero, Projects, Skills)
+│   │   └── ui/             # Reusable UI elements
+│   ├── context/            # React Context providers (e.g., LanguageContext)
+│   ├── data/               # Static data, translations, and contents
+│   ├── hooks/              # Custom React hooks
+│   ├── styles/             # Global CSS and Tailwind configurations
+│   ├── types/              # TypeScript interfaces and type definitions
+│   ├── App.tsx             # Root component
+│   └── main.tsx            # Entry point
+└── legacy/                 # Archival versions of the previous portfolio
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Setup & Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Run development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Linting & Type Checking
+- Run `npm run lint` for fast linting with oxlint.
+- The project is configured with `@/` path alias for cleaner imports.

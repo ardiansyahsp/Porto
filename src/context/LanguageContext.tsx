@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
-import en from '../data/lang/en.json';
-import id from '../data/lang/id.json';
+import en from '@/data/lang/en.json';
+import id from '@/data/lang/id.json';
 
 type LangType = 'en' | 'id';
 
