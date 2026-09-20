@@ -3,7 +3,7 @@
     "nav.skills": "Keahlian",
     "nav.experience": "Pengalaman",
     "nav.about": "Tentang",
-    "nav.search": "Cari dokumentasi",
+    "nav.search": "Cari portofolio",
 
     "hero.greeting": "Hai, Saya",
     "hero.name_line1": "Ardiansyah",
@@ -27,12 +27,13 @@
     "grid.tab_mobile": "Mobile",
     "grid.tab_cv": "Computer Vision",
 
-    "footer.tagline": "Membangun produk web, mobile, dan computer vision.",
+    "footer.tagline": "Membangun pengalaman digital yang luar biasa di web, mobile, dan computer vision.",
     "footer.first_name": "Nama depan",
     "footer.last_name": "Nama belakang",
     "footer.email": "Alamat email",
     "footer.hire_button": "Hubungi Saya",
     "footer.disclaimer": "Dengan mengirim, Anda menyetujui syarat dan ketentuan kami.",
+    "footer.cta_heading": "Punya ide? Mari wujudkan bersama.",
     "footer.nav_title": "Navigasi",
     "footer.nav_home": "Beranda",
     "footer.nav_project": "Proyek",
@@ -40,5 +41,7 @@
     "footer.nav_contact": "Kontak",
     "footer.skills_title": "Teknologi",
     "footer.connect_title": "Hubungi",
-    "footer.copyright": "© 2026 Ardiansyah Sisworo Putra. Hak cipta dilindungi."
+    "footer.copyright": "© 2026 Ardiansyah Sisworo Putra. Hak cipta dilindungi.",
+    "footer.availability": "Tersedia untuk proyek baru",
+    "footer.location": "Semarang, Indonesia"
 }

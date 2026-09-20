@@ -26,26 +26,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
   }, []);
 
   return (
-    <nav className={`sticky top-0 z-50 bg-white border-b border-border-light transition-shadow duration-300 ${isScrolled ? 'navbar-scrolled' : ''}`}>
+    <nav className={`fixed w-full top-0 z-50 transition-all duration-300 border-b ${isScrolled ? 'bg-white/80 backdrop-blur-md border-border-light shadow-sm py-1' : 'bg-white border-transparent py-2'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
+          
           {/* Logo */}
           <div className="flex items-center gap-2 shrink-0">
             <a href="#" className="flex items-center gap-2.5 group">
-              <svg className="w-8 h-8" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 2L32 12L18 34L4 12L18 2Z" fill="#FF2D20"/>
-                <path d="M18 2L32 12L18 18L4 12L18 2Z" fill="#FF4D42"/>
-                <path d="M18 18L32 12L18 34Z" fill="#E5261A"/>
-              </svg>
-              <span className="font-bold text-lg text-body tracking-tight">Ardiansyah</span>
+              <div className="transition-transform duration-300 group-hover:scale-110">
+                {/* SVG diamond lama dihapus, diganti bersih dengan img */}
+                <img src="/images/logo.png" alt="Logo Ardiansyah" className="w-8 h-8 object-contain" />
+              </div>
+              <span className="font-bold text-lg text-body tracking-tight group-hover:text-laravel transition-colors">
+                Ardiansyah
+              </span>
             </a>
           </div>
 
           {/* Nav Links */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-2">
             {['projects', 'skills', 'experience', 'about'].map((item) => (
-              <a key={item} href={`#${item}`} className="relative px-3 py-2 text-sm font-medium text-muted hover:text-body transition-colors flex items-center gap-1">
-                <span>{t(`nav.${item}`)}</span>
+              <a 
+                key={item} 
+                href={`#${item}`} 
+                className="relative px-4 py-2 text-sm font-medium text-muted hover:text-body hover:bg-surface rounded-lg transition-all"
+              >
+                {t(`nav.${item}`)}
               </a>
             ))}
           </div>
@@ -73,10 +79,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
               )}
             </div>
 
-            <button onClick={onOpenSearch} className="hidden md:flex items-center gap-3 px-3 py-1.5 text-sm text-muted border border-border rounded-lg hover:bg-surface transition-colors w-52">
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              <span className="flex-1 text-left truncate">{t('nav.search')}</span>
-              <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-muted bg-surface rounded border border-border">⌘K</kbd>
+            <button onClick={onOpenSearch} className="hidden md:flex items-center gap-3 px-3 py-1.5 text-sm text-muted border border-border rounded-lg hover:bg-surface hover:border-gray-300 transition-all w-52 bg-gray-50/50 group">
+              <svg className="w-4 h-4 shrink-0 text-gray-400 group-hover:text-laravel transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <span className="flex-1 text-left truncate">{lang === 'id' ? 'Cari portofolio...' : 'Search projects...'}</span>
+              <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-gray-500 bg-white rounded border border-gray-200 shadow-sm">⌘K</kbd>
             </button>
 
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg text-muted hover:text-body hover:bg-surface transition-colors">
@@ -87,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-border-light bg-white">
+        <div className="lg:hidden border-t border-border-light bg-white/95 backdrop-blur-md">
           <div className="px-4 py-4 space-y-1">
             {['projects', 'skills', 'experience', 'about'].map((item) => (
               <a key={item} href={`#${item}`} onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-sm font-medium text-muted hover:text-body hover:bg-surface rounded-lg">

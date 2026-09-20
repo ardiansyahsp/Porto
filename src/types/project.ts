@@ -1,12 +1,17 @@
-export type Category = 'web' | 'mobile' | 'computer_vision';
-
+// src/types/project.ts
 export interface Project {
-  id: string;
+  id: string; // Tambahkan ini (misal: "typicall-crm")
   title: string;
-  category: Category;
+  category: string;
   categoryLabel: string;
-  description: string;
   image: string;
+  description: string;
   wide?: boolean;
-  techStack?: string[];
+  techStack?: string[]; // Seperti di ProjectCard
+  // --- Tambahan untuk halaman detail ---
+  fullDescription?: string;
+  role?: string;
+  features?: string[];
+  liveUrl?: string;
+  githubUrl?: string;
 }

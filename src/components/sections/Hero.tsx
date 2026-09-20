@@ -16,20 +16,29 @@ const staggerContainer: Variants = {
   }
 };
 
-const floating: Variants = {
+const floatingMain: Variants = {
   animate: {
     y: [0, -12, 0],
     transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
   }
 };
 
+// Custom variant untuk ikon agar melayangnya bergantian
+const floatingIcon = (delay: number): Variants => ({
+  animate: {
+    y: [0, -15, 0],
+    transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay }
+  }
+});
+
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
 
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      {/* Padding dipertahankan untuk Optical Centering agar posisi pas */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-16 sm:pb-32 lg:pt-16 lg:pb-36 min-h-[85vh] flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
           
           {/* Kolom Kiri: Teks */}
           <motion.div 
@@ -71,37 +80,35 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
             <div className="relative w-full max-w-md">
+              {/* Class drop-shadow dihapus agar kotak putih hilang */}
               <motion.img 
-                variants={floating}
+                variants={floatingMain}
                 animate="animate"
                 src="/images/hero-illustration.png" 
                 alt="Isometric illustration" 
                 className="w-full h-auto hero-illustration" 
               />
               
-              {/* Ikon Teknologi Melayang (Floating Badges) */}
+              {/* Ikon Teknologi Melayang */}
               <motion.div 
-                variants={floating} 
+                variants={floatingIcon(0)} 
                 animate="animate" 
-                style={{ animationDelay: '0s' }} 
                 className="absolute top-8 left-2 bg-white/90 backdrop-blur-sm p-3 rounded-2xl shadow-xl border border-gray-100"
               >
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="Laravel" className="w-7 h-7" />
               </motion.div>
               
               <motion.div 
-                variants={floating} 
+                variants={floatingIcon(1.2)} 
                 animate="animate" 
-                style={{ animationDelay: '-1s' }} 
                 className="absolute bottom-24 -right-4 bg-white/90 backdrop-blur-sm p-3 rounded-2xl shadow-xl border border-gray-100"
               >
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" className="w-7 h-7" />
               </motion.div>
 
               <motion.div 
-                variants={floating} 
+                variants={floatingIcon(2.4)} 
                 animate="animate" 
-                style={{ animationDelay: '-2s' }} 
                 className="absolute top-1/2 -left-8 bg-white/90 backdrop-blur-sm p-3 rounded-2xl shadow-xl border border-gray-100"
               >
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" className="w-7 h-7" />
