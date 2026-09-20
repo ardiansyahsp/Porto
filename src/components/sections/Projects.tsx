@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
-import { projects, type Category } from '../../data/projects';
-import { ProjectCard } from '../ui/ProjectCard';
-import { SectionDivider } from '../ui/SectionDivider';
+import { useLanguage } from '@/hooks';
+import { projects } from '@/data/projects';
+import type { Category } from '@/types';
+import { ProjectCard } from '@/components/ui';
+import { SectionDivider } from '@/components/ui';
 
 type Tab = 'all' | Category;
 
@@ -31,45 +32,46 @@ export const Projects: React.FC = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="section-divider-dots flex flex-col items-center justify-center text-center py-10 sm:py-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-normal text-body leading-tight tracking-tight">
-            <span className="block text-muted">{t('transition.heading_line1')}</span>
-            <span className="block font-semibold mt-1">{t('transition.heading_line2')}</span>
-          </h2>
-        </div>
-      </div>
-
-      <SectionDivider />
-
-      <section id="projects">
-        <div className="bg-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
-              <div className="space-y-6">
-                <h2 className="text-7xl sm:text-8xl lg:text-[96px] font-normal text-body leading-[0.95] tracking-tighter">
-                  <span>{t('projects.my')}</span><br/>
-                  <span>{t('projects.title')}</span>
-                </h2>
-                <p className="text-base sm:text-lg text-muted leading-relaxed max-w-md">
-                  {t('projects.description')}
+      <section id="projects" className="bg-white overflow-hidden pt-12 sm:pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center min-h-[60vh]">
+            
+            {/* Kolom Kiri: Teks & Penjelasan */}
+            <div className="space-y-8 lg:pr-8 flex flex-col justify-center">
+              <div className="space-y-4">
+                <p className="text-sm font-semibold text-laravel tracking-wide uppercase">
+                  Featured Mobile Project
                 </p>
+                <h2 className="text-5xl sm:text-6xl lg:text-[72px] font-normal text-body leading-[1.05] tracking-tight">
+                  <span>{t('projects.my')}</span><br/>
+                  <span className="font-semibold text-body">{t('projects.title')}</span>
+                </h2>
+              </div>
+              
+              <p className="text-lg text-muted leading-relaxed max-w-lg">
+                {t('projects.description')}
+              </p>
+              
+              <div className="pt-2">
                 <a href="#project-grid" className="btn-transition inline-flex items-center gap-2 px-6 py-3 bg-laravel hover:bg-laravel-dark text-white text-sm font-semibold rounded-lg shadow-sm shadow-laravel/20">
                   <span>{t('projects.view_button')}</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
               </div>
-              <div className="flex justify-center lg:justify-end">
-                <div className="phone-stage">
-                  <div className="phone-3d">
-                    <div className="phone-3d-notch"></div>
-                    <div className="phone-3d-screen">
-                      <img src="/images/phone-mockup.png" alt="Mobile app project" />
-                    </div>
+            </div>
+
+            {/* Kolom Kanan: Mockup Smartphone */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="phone-stage transform lg:-translate-y-4">
+                <div className="phone-3d hover:scale-[1.02] transition-transform duration-500">
+                  <div className="phone-3d-notch"></div>
+                  <div className="phone-3d-screen">
+                    <img src="/images/phone-mockup.png" alt="Mobile app project" className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>

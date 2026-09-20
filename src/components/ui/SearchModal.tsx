@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '@/hooks';
 
 interface SearchModalProps {
   isOpen: boolean;

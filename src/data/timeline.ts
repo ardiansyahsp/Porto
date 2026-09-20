@@ -1,10 +1,6 @@
-export interface TimelineEvent {
-  id: string;
-  year: string;
-  descriptionHTML: string;
-  progressMarker: number;
-  topPercent: number;
-}
+import type { TimelineEvent } from '@/types';
+
+export type { TimelineEvent } from '@/types';
 
 export const timelineEvents: TimelineEvent[] = [
   {

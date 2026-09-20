@@ -1,29 +1,62 @@
 import React from 'react';
-import type { Project } from '../../data/projects';
+import type { Project } from '@/types';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  // Asumsi ada penambahan properti 'techStack' bertipe string[] pada data Project.
+  // Jika belum ada di data/projects.ts, kita siapkan array kosong sebagai fallback sementara.
+  const techStack = (project as any).techStack || ['Laravel', 'MySQL'];
+
   return (
-    <div className={`project-card rounded-xl border border-border bg-white overflow-hidden group ${project.wide ? 'md:col-span-2' : ''}`}>
+    <div className={`project-card flex flex-col rounded-xl border border-border bg-white overflow-hidden group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ${project.wide ? 'md:col-span-2' : ''}`}>
+      
+      {/* Area Gambar */}
       <div className={`relative overflow-hidden ${project.wide ? 'aspect-[16/9]' : 'aspect-[4/3]'} bg-surface`}>
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <span className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md ${project.category === 'web' ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'}`}>
+        
+        {/* Overlay gelap halus saat di-hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+        {/* Badge Kategori */}
+        <span className={`absolute top-4 left-4 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md shadow-sm backdrop-blur-md ${project.category === 'web' ? 'bg-blue-600/90 text-white' : 'bg-purple-600/90 text-white'}`}>
           {project.categoryLabel}
         </span>
       </div>
-      <div className="p-4">
-        <h3 className="text-base font-bold text-body group-hover:text-laravel transition-colors leading-snug">
-          {project.title}
-        </h3>
-        <p className="mt-1 text-sm text-muted">{project.description}</p>
+      
+      {/* Area Konten */}
+      <div className="p-5 flex flex-col flex-grow">
+        <div className="flex justify-between items-start gap-4">
+          <h3 className="text-lg font-bold text-body group-hover:text-laravel transition-colors leading-snug">
+            {project.title}
+          </h3>
+          
+          {/* Ikon panah diagonal muncul saat hover */}
+          <svg className="w-5 h-5 text-transparent group-hover:text-laravel transition-colors shrink-0 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </div>
+        
+        <p className="mt-2 text-sm text-muted line-clamp-2">
+          {project.description}
+        </p>
+
+        {/* Area Tech Stack di bagian paling bawah */}
+        <div className="mt-auto pt-5 flex flex-wrap gap-2">
+          {techStack.map((tech: string, idx: number) => (
+            <span key={idx} className="px-2 py-1 text-[10px] font-bold text-muted bg-surface border border-border-light rounded-md">
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
+      
     </div>
   );
 };
