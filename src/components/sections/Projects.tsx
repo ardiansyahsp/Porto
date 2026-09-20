@@ -16,7 +16,9 @@ export const Projects: React.FC = () => {
     return projects.filter(p => p.category === activeTab);
   }, [activeTab]);
 
-  const counts = useMemo(() => ({
+  // PERBAIKAN TS7053: Kita beri tahu TypeScript bahwa objek ini 
+  // PASTI memiliki key berjenis 'Tab' dan value berjenis 'number'
+  const counts: Record<Tab, number> = useMemo(() => ({
     all: projects.length,
     web: projects.filter(p => p.category === 'web').length,
     mobile: projects.filter(p => p.category === 'mobile').length,

@@ -3,13 +3,13 @@
     "nav.skills": "Skills",
     "nav.experience": "Experience",
     "nav.about": "About",
-    "nav.search": "Search docs",
+    "nav.search": "Search projects",
 
     "hero.greeting": "Hi, I'm",
     "hero.name_line1": "Ardiansyah",
     "hero.name_line2": "Sisworo Putra",
     "hero.description": "A passionate Full-Stack Developer specializing in building exceptional web applications, mobile apps, and computer vision solutions.",
-    "hero.cta_primary": "Explore My Project",
+    "hero.cta_primary": "Explore My Projects",
     "hero.cta_secondary": "Download CV",
 
     "strip.label": "TECH STACK & TOOLS I'VE USED",
@@ -27,18 +27,21 @@
     "grid.tab_mobile": "Mobile",
     "grid.tab_cv": "Computer Vision",
 
-    "footer.tagline": "Building web, mobile, and computer vision products.",
+    "footer.tagline": "Building exceptional digital experiences across web, mobile, and computer vision.",
     "footer.first_name": "First name",
     "footer.last_name": "Last name",
     "footer.email": "Email address",
     "footer.hire_button": "Hire Me",
     "footer.disclaimer": "By submitting, you agree to our terms and conditions.",
-    "footer.nav_title": "Navigations",
+    "footer.cta_heading": "Have an idea? Let's build it together.",
+    "footer.nav_title": "Navigation",
     "footer.nav_home": "Home",
-    "footer.nav_project": "Project",
+    "footer.nav_project": "Projects",
     "footer.nav_about": "About",
     "footer.nav_contact": "Contact",
-    "footer.skills_title": "Tech Stack",
+    "footer.skills_title": "Core Stack",
     "footer.connect_title": "Connect",
-    "footer.copyright": "© 2026 Ardiansyah Sisworo Putra. All rights reserved."
+    "footer.copyright": "© 2026 Ardiansyah Sisworo Putra. All rights reserved.",
+    "footer.availability": "Available for new projects",
+    "footer.location": "Semarang, Indonesia"
 }
