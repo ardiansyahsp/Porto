@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
+import { Inbox } from '@/components/Inbox'; // Sesuaikan lokasi file jika berbeda
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -312,6 +313,10 @@ export default function Admin() {
             </table>
           </div>
         </div>
+
+        {/* --- KOMPONEN INBOX DITAMBAHKAN DI SINI --- */}
+        <Inbox />
+        
       </div>
 
       {/* MODAL OVERLAY & FORM */}
