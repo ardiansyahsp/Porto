@@ -13,10 +13,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <Link 
       to={`/project/${project.id}`} 
-      className={`project-card flex flex-col rounded-xl border border-border bg-white overflow-hidden group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ${project.wide ? 'md:col-span-2' : ''}`}
+      className={`project-card flex flex-col rounded-xl border border-border dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ${project.wide ? 'md:col-span-2' : ''}`}
     >
       {/* Area Gambar */}
-      <div className={`relative overflow-hidden ${project.wide ? 'aspect-[16/9]' : 'aspect-[4/3]'} bg-surface`}>
+      <div className={`relative overflow-hidden ${project.wide ? 'aspect-[16/9]' : 'aspect-[4/3]'} bg-surface dark:bg-slate-900`}>
         <img
           src={project.image}
           alt={project.title}
@@ -31,21 +31,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       {/* Area Konten */}
       <div className="p-5 flex flex-col flex-grow">
         <div className="flex justify-between items-start gap-4">
-          <h3 className="text-lg font-bold text-body group-hover:text-laravel transition-colors leading-snug">
+          <h3 className="text-lg font-bold text-body dark:text-slate-100 group-hover:text-laravel transition-colors leading-snug">
             {project.title}
           </h3>
           <svg className="w-5 h-5 text-transparent group-hover:text-laravel transition-colors shrink-0 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </div>
-        <p className="mt-2 text-sm text-muted line-clamp-2">
+        <p className="mt-2 text-sm text-muted dark:text-slate-400 line-clamp-2">
           {project.description}
         </p>
 
         {/* Area Tech Stack */}
         <div className="mt-auto pt-5 flex flex-wrap gap-2">
           {techStack.map((tech: string, idx: number) => (
-            <span key={idx} className="px-2 py-1 text-[10px] font-bold text-muted bg-surface border border-border-light rounded-md">
+            <span key={idx} className="px-2 py-1 text-[10px] font-bold text-muted dark:text-slate-300 bg-surface dark:bg-slate-700 border border-border-light dark:border-slate-600 rounded-md">
               {tech}
             </span>
           ))}

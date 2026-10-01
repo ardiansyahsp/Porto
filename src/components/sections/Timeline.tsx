@@ -171,10 +171,10 @@ export const Timeline: React.FC = () => {
   }, [maskId]); // Efek dire-render dengan aman jika ID berubah
 
   return (
-    <section id="timeline" className="w-full relative bg-white py-20 border-y border-border-light overflow-hidden">
+    <section id="timeline" className="w-full relative bg-white dark:bg-slate-900 py-20 border-y border-border-light dark:border-slate-700 overflow-hidden transition-colors duration-300">
       <div className="text-center mb-10 px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-body mb-4">Timeline & Journey</h2>
-        <p className="text-muted text-center max-w-lg mx-auto">Scroll ke bawah untuk melihat perjalanan karir dan pendidikan.</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-body dark:text-slate-100 mb-4">Timeline & Journey</h2>
+        <p className="text-muted dark:text-slate-400 text-center max-w-lg mx-auto">Scroll ke bawah untuk melihat perjalanan karir dan pendidikan.</p>
       </div>
 
       <div className="relative w-full max-w-3xl mx-auto mt-10" ref={timelineRef}>
@@ -190,7 +190,7 @@ export const Timeline: React.FC = () => {
                 d="M 400 0 C 200 150, 100 350, 150 550 C 200 700, 350 750, 500 750 C 750 750, 850 500, 550 500 C 250 500, 150 750, 250 1150 C 350 1550, 100 1700, 150 1950" />
             </mask>
           </defs>
-          <path id="tlInk" ref={inkShapeRef} fill="#1f2937" mask={`url(#${maskId})`} />
+          <path id="tlInk" ref={inkShapeRef} className="fill-[#1f2937] dark:fill-slate-400 transition-colors duration-300" mask={`url(#${maskId})`} />
         </svg>
         
         {milestones.map((_, i) => (
@@ -225,7 +225,7 @@ export const Timeline: React.FC = () => {
           >
             <p className="text-sm md:text-base font-bold text-red-600 mb-1">{m.year}</p>
             <div 
-              className="text-sm md:text-base text-gray-800 bg-white p-4 rounded-xl border border-gray-100 shadow-sm" 
+              className="text-sm md:text-base text-gray-800 dark:text-slate-200 bg-white dark:bg-slate-800 p-4 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm transition-colors duration-300" 
               dangerouslySetInnerHTML={{ __html: m.role }}
             ></div>
           </div>

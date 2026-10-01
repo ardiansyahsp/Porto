@@ -18,12 +18,12 @@ export const Skills: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="skills" className="bg-surface border-y border-border-light overflow-hidden">
+    <section id="skills" className="bg-surface dark:bg-slate-900 border-y border-border-light dark:border-slate-700 overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           
-          <div className="flex-shrink-0 z-20 bg-surface lg:pr-4">
-            <p className="text-xs font-bold tracking-wider text-muted uppercase whitespace-nowrap">
+          <div className="flex-shrink-0 z-20 bg-surface dark:bg-slate-900 lg:pr-4 transition-colors duration-300">
+            <p className="text-xs font-bold tracking-wider text-muted dark:text-slate-400 uppercase whitespace-nowrap">
               {t('strip.label')}
             </p>
           </div>
@@ -31,8 +31,8 @@ export const Skills: React.FC = () => {
           {/* Marquee Container dengan efek transisi di ujung */}
           <div className="relative flex w-full overflow-hidden">
             {/* Gradien kiri & kanan agar animasi terlihat halus saat muncul/menghilang */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-surface to-transparent z-10"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-surface to-transparent z-10"></div>
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-surface dark:from-slate-900 to-transparent z-10 transition-colors duration-300"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-surface dark:from-slate-900 to-transparent z-10 transition-colors duration-300"></div>
             
             <motion.div 
               className="flex items-center gap-12 sm:gap-16 shrink-0"
@@ -46,7 +46,7 @@ export const Skills: React.FC = () => {
                   className="flex items-center gap-3 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 cursor-pointer"
                 >
                   <img src={tech.icon} alt={tech.name} className="w-8 h-8 object-contain" />
-                  <span className="text-sm font-semibold text-body whitespace-nowrap">{tech.name}</span>
+                  <span className="text-sm font-semibold text-body dark:text-slate-100 whitespace-nowrap">{tech.name}</span>
                 </div>
               ))}
             </motion.div>
