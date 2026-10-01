@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import { Navbar, Footer } from '@/components/layout';
 import { SearchModal } from '@/components/ui';
+import { ProtectedRoute } from '@/components/ProtectedRoute'; // <-- Import file satpam (ProtectedRoute)
 
 import Home from '@/pages/Home';
 import ProjectDetail from '@/pages/ProjectDetail';
 import { LinkBio } from '@/pages/LinkBio';
-import Login from './pages/Login'; // <-- Import halaman Login yang baru dibuat
+import Login from './pages/Login'; 
 
 // Komponen untuk scroll ke atas setiap ganti halaman
 const ScrollToTop = () => {
@@ -42,11 +43,15 @@ function App() {
       <ScrollToTop />
       
       <Routes>
-        {/* 2. Halaman Login Admin (Berdiri sendiri TANPA Navbar/Footer) */}
-        <Route path="/login" element={<Login />} />
-
-        {/* Rute Admin Dashboard */}
-        <Route path="/admin" element={<Admin />} />
+        {/* Rute Admin Dashboard - SEKARANG DIGEMBOK OLEH PROTECTED ROUTE */}
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          } 
+        />
 
         {/* 1. Halaman Utama: Link Bio (Berdiri sendiri TANPA Navbar/Footer) */}
         <Route path="/" element={<LinkBio />} />
