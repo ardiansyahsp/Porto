@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 interface Message {
@@ -33,7 +33,7 @@ export const Inbox = () => {
     if (!window.confirm('Yakin ingin menghapus pesan ini?')) return;
 
     const { error } = await supabase.from('messages').delete().eq('id', id);
-    
+
     if (error) {
       console.error('Error deleting message:', error);
       alert('Gagal menghapus pesan.');
@@ -85,7 +85,7 @@ export const Inbox = () => {
                     })}
                   </span>
                   {/* Tombol Hapus (Muncul saat di-hover) */}
-                  <button 
+                  <button
                     onClick={() => deleteMessage(msg.id)}
                     className="text-xs text-red-500 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
                   >
