@@ -171,7 +171,7 @@ export const Timeline: React.FC = () => {
   }, [maskId]); // Efek dire-render dengan aman jika ID berubah
 
   return (
-    <section id="timeline" className="w-full relative bg-white dark:bg-slate-900 py-20 border-y border-border-light dark:border-slate-700 overflow-hidden transition-colors duration-300">
+    <section id="experience" className="w-full relative bg-white dark:bg-slate-900 py-20 border-y border-border-light dark:border-slate-700 overflow-hidden transition-colors duration-300">
       <div className="text-center mb-10 px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-body dark:text-slate-100 mb-4">Timeline & Journey</h2>
         <p className="text-muted dark:text-slate-400 text-center max-w-lg mx-auto">Scroll ke bawah untuk melihat perjalanan karir dan pendidikan.</p>

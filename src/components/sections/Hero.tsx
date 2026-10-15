@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/hooks';
 import { motion, type Variants } from 'framer-motion';
+import { LiveMetricsWidget } from '@/components/sections/LiveMetricsWidget';
 
 // Konfigurasi animasi bawaan
 const fadeInUp: Variants = {
@@ -129,6 +130,13 @@ export const Hero: React.FC = () => {
                 <span>{t('hero.cta_secondary')}</span>
               </a>
             </motion.div>
+
+            {/* --- WIDGET DITAMBAHKAN DI SINI --- */}
+            <motion.div variants={fadeInUp} className="pt-6">
+              <LiveMetricsWidget />
+            </motion.div>
+            {/* ---------------------------------- */}
+
           </motion.div>
 
           {/* KOLOM KANAN: ANIMASI GALERI BERJALAN */}

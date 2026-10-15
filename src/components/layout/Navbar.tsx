@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks';
+import { Link, useLocation } from 'react-router-dom'; // Ditambahkan untuk navigasi halaman
 
 interface NavbarProps {
   onOpenSearch: () => void;
@@ -7,6 +8,8 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
   const { lang, setLang, toggleLang, t } = useLanguage();
+  const location = useLocation(); // Mendapatkan informasi URL aktif saat ini
+  
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -49,30 +52,43 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           
-          {/* Logo */}
+          {/* Logo (Sekarang mengarah ke /portfolio agar selalu bisa kembali ke home) */}
           <div className="flex items-center gap-2 shrink-0">
-            <a href="#" className="flex items-center gap-2.5 group">
+            <Link to="/portfolio" className="flex items-center gap-2.5 group">
               <div className="transition-transform duration-300 group-hover:scale-110">
-                {/* SVG diamond lama dihapus, diganti bersih dengan img */}
                 <img src="/images/logo.png" alt="Logo Ardiansyah" className="w-8 h-8 object-contain" />
               </div>
               <span className="font-bold text-lg text-body tracking-tight group-hover:text-laravel transition-colors">
                 Ardiansyah
               </span>
-            </a>
+            </Link>
           </div>
 
-          {/* Nav Links */}
+          {/* Nav Links (Desktop) */}
           <div className="hidden lg:flex items-center gap-2">
             {['projects', 'skills', 'experience', 'about'].map((item) => (
               <a 
                 key={item} 
-                href={`#${item}`} 
+                // Jika sedang di dashboard, klik menu ini akan otomatis kembali ke portfolio lalu scroll ke section yang dituju
+                href={location.pathname === '/portfolio' ? `#${item}` : `/portfolio#${item}`} 
                 className="relative px-4 py-2 text-sm font-medium text-muted dark:text-slate-400 hover:text-body dark:hover:text-slate-200 hover:bg-surface dark:hover:bg-slate-800 rounded-lg transition-all"
               >
                 {t(`nav.${item}`)}
               </a>
             ))}
+            
+            {/* --- TAB DASHBOARD BARU --- */}
+            <Link 
+              to="/dashboard"
+              className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+                location.pathname === '/dashboard' 
+                  ? 'text-laravel bg-surface dark:bg-slate-800 font-bold' 
+                  : 'text-muted dark:text-slate-400 hover:text-body dark:hover:text-slate-200 hover:bg-surface dark:hover:bg-slate-800'
+              }`}
+            >
+              Dashboard
+            </Link>
+            {/* -------------------------- */}
           </div>
 
           {/* Actions */}
@@ -128,10 +144,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
         <div className="lg:hidden border-t border-border-light dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
           <div className="px-4 py-4 space-y-1">
             {['projects', 'skills', 'experience', 'about'].map((item) => (
-              <a key={item} href={`#${item}`} onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-sm font-medium text-muted dark:text-slate-400 hover:text-body dark:hover:text-slate-200 hover:bg-surface dark:hover:bg-slate-800 rounded-lg">
+              <a 
+                key={item} 
+                href={location.pathname === '/portfolio' ? `#${item}` : `/portfolio#${item}`} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="block px-3 py-2 text-sm font-medium text-muted dark:text-slate-400 hover:text-body dark:hover:text-slate-200 hover:bg-surface dark:hover:bg-slate-800 rounded-lg"
+              >
                 {t(`nav.${item}`)}
               </a>
             ))}
+            
+            {/* --- TAB DASHBOARD MOBILE BARU --- */}
+            <Link 
+              to="/dashboard" 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className={`block px-3 py-2 text-sm font-medium rounded-lg ${
+                location.pathname === '/dashboard' 
+                  ? 'text-laravel bg-surface dark:bg-slate-800 font-bold' 
+                  : 'text-muted dark:text-slate-400 hover:text-body dark:hover:text-slate-200 hover:bg-surface dark:hover:bg-slate-800'
+              }`}
+            >
+              Dashboard
+            </Link>
+            {/* --------------------------------- */}
+
             <div className="flex items-center gap-2 pt-3 border-t border-border-light dark:border-slate-800">
               <button onClick={toggleLang} className="px-3 py-1.5 text-sm font-medium text-muted dark:text-slate-400 border border-border dark:border-slate-700 rounded-lg hover:bg-surface dark:hover:bg-slate-800">
                 {lang === 'id' ? 'Switch to English' : 'Ganti ke Indonesia'}

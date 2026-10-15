@@ -14,6 +14,7 @@ export default function Home() {
       <SectionDivider />
       <Timeline />
       <SectionDivider />
+  
 
       {/* Form Kontak ditambahkan di dalam bungkus fragment <> */}
       <ContactForm />
