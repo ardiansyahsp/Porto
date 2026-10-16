@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { motion } from 'framer-motion';
 import { GitHubCalendar } from 'react-github-calendar';
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'; // <-- Import Recharts
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 interface CodingActivity {
   id: string;
@@ -11,6 +11,14 @@ interface CodingActivity {
   duration_seconds: number;
   last_updated: string;
 }
+
+// Fungsi untuk mengambil tanggal (YYYY-MM-DD) berdasarkan zona waktu lokal pengguna
+const getLocalDateString = (d: Date) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export default function Dashboard() {
   const [activities, setActivities] = useState<CodingActivity[]>([]);
@@ -82,7 +90,7 @@ export default function Dashboard() {
         .eq('id', 1)
         .single();
         
-      if (error) throw error; // <-- Tambahkan baris ini
+      if (error) throw error;
       if (data) setTotalViews(data.total_views);
     } catch (err) {
       console.error('Gagal mengambil data views:', err);
@@ -90,34 +98,34 @@ export default function Dashboard() {
   };
 
   // --- LOGIKA DATA: HARI INI ---
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = getLocalDateString(new Date());
   const todayActivities = activities.filter((act) => act.date === todayStr);
   const totalSecondsToday = todayActivities.reduce((acc, curr) => acc + curr.duration_seconds, 0);
 
+  // Mengubah format waktu ke bahasa Inggris (h dan m)
   const formatTime = (totalSec: number) => {
     const hours = Math.floor(totalSec / 3600);
     const minutes = Math.floor((totalSec % 3600) / 60);
-    if (hours > 0) return `${hours}j ${minutes}m`;
+    if (hours > 0) return `${hours}h ${minutes}m`;
     return `${minutes}m`;
   };
 
   // --- LOGIKA DATA: CHART 7 HARI TERAKHIR ---
   const getWeeklyData = () => {
     const days = [];
-    // Mundur dari 6 hari lalu sampai hari ini (0)
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split('T')[0];
+      const dateStr = getLocalDateString(d);
       
-      // Ambil semua aktivitas di tanggal ini, lalu jumlahkan
       const dayActs = activities.filter(act => act.date === dateStr);
       const sumSeconds = dayActs.reduce((acc, curr) => acc + curr.duration_seconds, 0);
       
       days.push({
         date: dateStr,
-        displayDate: d.toLocaleDateString('id-ID', { weekday: 'short' }), // Contoh: Sen, Sel, Rab
-        hours: Number((sumSeconds / 3600).toFixed(2)) // Ubah ke Jam untuk chart (misal: 2.5 jam)
+        displayDate: d.toLocaleDateString('id-ID', { weekday: 'short' }), 
+        hours: Number((sumSeconds / 3600).toFixed(2)), 
+        rawSeconds: sumSeconds // Menyimpan detik mentah untuk Tooltip
       });
     }
     return days;
@@ -217,7 +225,10 @@ export default function Dashboard() {
                       return (
                         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-3 rounded-lg shadow-xl text-xs">
                           <p className="font-bold text-slate-800 dark:text-white mb-1">{payload[0].payload.displayDate}</p>
-                          <p className="text-emerald-500 font-medium">{payload[0].value} Jam Coding</p>
+                          {/* Menggunakan fungsi formatTime dengan data rawSeconds */}
+                          <p className="text-emerald-500 font-medium">
+                            {formatTime(payload[0].payload.rawSeconds)} Coding
+                          </p>
                         </div>
                       );
                     }
@@ -228,7 +239,6 @@ export default function Dashboard() {
                   {weeklyData.map((entry, index) => (
                     <Cell 
                       key={`cell-${index}`} 
-                      // Warna batang: Merah/Orange (Laravel color) untuk hari ini, Emerald untuk hari sebelumnya
                       fill={entry.date === todayStr ? (isDarkMode ? '#f87171' : '#ef4444') : '#10b981'} 
                     />
                   ))}
