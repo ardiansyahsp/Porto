@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { motion } from 'framer-motion';
 import { GitHubCalendar } from 'react-github-calendar';
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from 'recharts';
 
 interface CodingActivity {
   id: string;
@@ -10,15 +10,19 @@ interface CodingActivity {
   project_name: string;
   duration_seconds: number;
   last_updated: string;
+  category?: string; // <-- Kolom baru
+  language?: string; // <-- Kolom baru
 }
 
-// Fungsi untuk mengambil tanggal (YYYY-MM-DD) berdasarkan zona waktu lokal pengguna
 const getLocalDateString = (d: Date) => {
   const year = d.getFullYear();
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
+
+// Palet warna untuk grafik donat Tech Stack
+const PIE_COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
 
 export default function Dashboard() {
   const [activities, setActivities] = useState<CodingActivity[]>([]);
@@ -102,7 +106,6 @@ export default function Dashboard() {
   const todayActivities = activities.filter((act) => act.date === todayStr);
   const totalSecondsToday = todayActivities.reduce((acc, curr) => acc + curr.duration_seconds, 0);
 
-  // Mengubah format waktu ke bahasa Inggris (h dan m)
   const formatTime = (totalSec: number) => {
     const hours = Math.floor(totalSec / 3600);
     const minutes = Math.floor((totalSec % 3600) / 60);
@@ -125,12 +128,30 @@ export default function Dashboard() {
         date: dateStr,
         displayDate: d.toLocaleDateString('id-ID', { weekday: 'short' }), 
         hours: Number((sumSeconds / 3600).toFixed(2)), 
-        rawSeconds: sumSeconds // Menyimpan detik mentah untuk Tooltip
+        rawSeconds: sumSeconds 
       });
     }
     return days;
   };
   const weeklyData = getWeeklyData();
+
+  // --- NEW: LOGIKA DATA TECH STACK ---
+  const getTechStackData = () => {
+    const stats: Record<string, number> = {};
+    activities.forEach(act => {
+      // Jika kolom language kosong/belum ada (dari data lama), masukkan ke "Lainnya"
+      const lang = act.language && act.language !== 'Unknown' ? act.language : 'Lainnya';
+      stats[lang] = (stats[lang] || 0) + act.duration_seconds;
+    });
+
+    // Ubah ke format array, filter yang > 0, urutkan terbanyak, ambil top 5
+    return Object.entries(stats)
+      .map(([name, value]) => ({ name, value }))
+      .filter(item => item.value > 0)
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
+  };
+  const techStackData = getTechStackData();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -147,8 +168,7 @@ export default function Dashboard() {
         
         {/* Card 1: Live Coding Today */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           className="md:col-span-2 bg-slate-50 dark:bg-slate-800/50 border border-border dark:border-slate-700/60 rounded-2xl p-6 backdrop-blur-sm flex flex-col justify-between"
         >
           <div className="flex items-center justify-between mb-4">
@@ -167,6 +187,11 @@ export default function Dashboard() {
             </h2>
             <p className="text-xs text-muted dark:text-slate-400 mt-2">
               Proyek Aktif Terakhir: <strong className="text-body dark:text-slate-200">{activities[0]?.project_name || 'Tidak ada'}</strong>
+              {activities[0]?.category && (
+                <span className="ml-2 px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-700 font-medium">
+                  {activities[0].category}
+                </span>
+              )}
             </p>
           </div>
           <div className="pt-4 border-t border-border dark:border-slate-700/50 text-[11px] text-muted dark:text-slate-400">
@@ -200,24 +225,18 @@ export default function Dashboard() {
           <p className="text-xs text-muted dark:text-slate-400">Diperbarui otomatis via Supabase RPC</p>
         </motion.div>
 
-        {/* --- NEW CARD: WEEKLY BAR CHART --- */}
+        {/* --- WEEKLY BAR CHART (Disesuaikan ukurannya) --- */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
-          className="md:col-span-3 lg:col-span-4 bg-slate-50 dark:bg-slate-800/50 border border-border dark:border-slate-700/60 rounded-2xl p-6 backdrop-blur-sm flex flex-col"
+          className="md:col-span-3 lg:col-span-2 bg-slate-50 dark:bg-slate-800/50 border border-border dark:border-slate-700/60 rounded-2xl p-6 backdrop-blur-sm flex flex-col"
         >
           <span className="text-xs font-semibold uppercase tracking-wider text-muted dark:text-slate-400 mb-6">
-            Weekly Coding Trend (Hours)
+            Weekly Activity Trend
           </span>
           <div className="w-full h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={weeklyData}>
-                <XAxis 
-                  dataKey="displayDate" 
-                  stroke={isDarkMode ? "#94a3b8" : "#64748b"} 
-                  fontSize={12} 
-                  tickLine={false} 
-                  axisLine={false} 
-                />
+                <XAxis dataKey="displayDate" stroke={isDarkMode ? "#94a3b8" : "#64748b"} fontSize={12} tickLine={false} axisLine={false} />
                 <Tooltip 
                   cursor={{fill: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}}
                   content={({ active, payload }) => {
@@ -225,10 +244,7 @@ export default function Dashboard() {
                       return (
                         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-3 rounded-lg shadow-xl text-xs">
                           <p className="font-bold text-slate-800 dark:text-white mb-1">{payload[0].payload.displayDate}</p>
-                          {/* Menggunakan fungsi formatTime dengan data rawSeconds */}
-                          <p className="text-emerald-500 font-medium">
-                            {formatTime(payload[0].payload.rawSeconds)} Coding
-                          </p>
+                          <p className="text-emerald-500 font-medium">{formatTime(payload[0].payload.rawSeconds)} Terlacak</p>
                         </div>
                       );
                     }
@@ -237,14 +253,66 @@ export default function Dashboard() {
                 />
                 <Bar dataKey="hours" radius={[4, 4, 0, 0]}>
                   {weeklyData.map((entry, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
-                      fill={entry.date === todayStr ? (isDarkMode ? '#f87171' : '#ef4444') : '#10b981'} 
-                    />
+                    <Cell key={`cell-${index}`} fill={entry.date === todayStr ? (isDarkMode ? '#f87171' : '#ef4444') : '#10b981'} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
+          </div>
+        </motion.div>
+
+        {/* --- NEW CARD: TECH STACK PIE CHART --- */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }}
+          className="md:col-span-3 lg:col-span-2 bg-slate-50 dark:bg-slate-800/50 border border-border dark:border-slate-700/60 rounded-2xl p-6 backdrop-blur-sm flex flex-col"
+        >
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted dark:text-slate-400 mb-6">
+            Top Tech Stack & Activity
+          </span>
+          <div className="w-full h-48 flex items-center justify-center">
+            {techStackData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={techStackData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={55}
+                    outerRadius={80}
+                    paddingAngle={3}
+                    dataKey="value"
+                    stroke="none"
+                  >
+                    {techStackData.map((_, index) => (
+                      <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        return (
+                          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-3 rounded-lg shadow-xl text-xs">
+                            <p className="font-bold text-slate-800 dark:text-white mb-1">{payload[0].payload.name}</p>
+                            <p className="text-emerald-500 font-medium">
+                              {formatTime(payload[0].payload.value)}
+                            </p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Legend 
+                    verticalAlign="bottom" 
+                    height={36} 
+                    iconType="circle"
+                    formatter={(value) => <span className="text-xs text-muted dark:text-slate-400 ml-1">{value}</span>}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="text-sm text-muted dark:text-slate-400">Menunggu data baru...</p>
+            )}
           </div>
         </motion.div>
 
