@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/hooks';
 import { motion, type Variants } from 'framer-motion';
-import { LiveMetricsWidget } from '@/components/sections/LiveMetricsWidget';
 
 // Konfigurasi animasi bawaan
 const fadeInUp: Variants = {
@@ -20,30 +19,22 @@ const staggerContainer: Variants = {
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isHovered, setIsHovered] = useState(false); // State untuk efek hover widget melayang
 
-  // Data Sertifikasi (Tipe baru: 'certificate')
+  // Data Sertifikasi 
   const col1Items = [
     {
-      id: 1,
-      type: 'certificate',
-      title: 'Python Coder',
-      subtitle: 'Kaggle Badge',
+      id: 1, type: 'certificate', title: 'Python Coder', subtitle: 'Kaggle Badge',
       icon: <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.34-.246.527-.246h3.279c.212 0 .305.082.281.246-.046.07-.152.188-.316.352l-5.283 5.156 6.362 8.766c.141.211.141.375.059.502z" /></svg>,
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
     },
     {
-      id: 2,
-      type: 'certificate',
-      title: 'Database Foundations',
-      subtitle: 'Oracle Academy',
+      id: 2, type: 'certificate', title: 'Database Foundations', subtitle: 'Oracle Academy',
       icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M16.143 2.246c-2.327-.47-5.01-.223-7.142.668-2.613 1.09-4.707 3.324-5.69 5.952-1.393 3.712-.325 8.125 2.721 10.825 2.508 2.222 6.078 3.125 9.28 2.378 2.553-.596 4.88-2.292 6.15-4.66 1.488-2.766 1.542-6.28.14-9.083-1.258-2.52-3.61-4.482-6.326-5.263l.867 5.182zm-4.314 13.926c-2.316.376-4.717-.988-5.578-3.178-.853-2.172.185-4.767 2.368-5.83 2.155-1.05 4.89-.133 6.02 1.99.746 1.397.667 3.23-.217 4.542-.718 1.066-1.84 1.846-3.13 2.115l.537 3.36z" /></svg>,
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
     },
     {
-      id: 3,
-      type: 'certificate',
-      title: 'IoT Development',
-      subtitle: 'Capstone Project',
+      id: 3, type: 'certificate', title: 'IoT Development', subtitle: 'Capstone Project',
       icon: <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
     },
@@ -51,36 +42,25 @@ export const Hero: React.FC = () => {
 
   const col2Items = [
     {
-      id: 4,
-      type: 'certificate',
-      title: 'Full-Stack Web',
-      subtitle: 'Professional Course',
+      id: 4, type: 'certificate', title: 'Full-Stack Web', subtitle: 'Professional Course',
       icon: <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>,
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
     },
     {
-      id: 5,
-      type: 'certificate',
-      title: 'Computer Vision',
-      subtitle: 'Advanced AI',
+      id: 5, type: 'certificate', title: 'Computer Vision', subtitle: 'Advanced AI',
       icon: <svg className="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>,
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
     },
     {
-      id: 6,
-      type: 'certificate',
-      title: 'Cloud Computing',
-      subtitle: 'Infrastructure',
+      id: 6, type: 'certificate', title: 'Cloud Computing', subtitle: 'Infrastructure',
       icon: <svg className="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>,
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
     },
   ];
 
-  // Gandakan array agar scroll tidak pernah putus (Infinite Loop)
   const loopCol1 = [...col1Items, ...col1Items, ...col1Items];
   const loopCol2 = [...col2Items, ...col2Items, ...col2Items];
 
-  // Desain Card untuk Sertifikat
   const renderCard = (item: any, index: number) => (
     <div
       key={`${item.id}-${index}`}
@@ -130,16 +110,9 @@ export const Hero: React.FC = () => {
                 <span>{t('hero.cta_secondary')}</span>
               </a>
             </motion.div>
-
-            {/* --- WIDGET DITAMBAHKAN DI SINI --- */}
-            <motion.div variants={fadeInUp} className="pt-6">
-              <LiveMetricsWidget />
-            </motion.div>
-            {/* ---------------------------------- */}
-
           </motion.div>
 
-          {/* KOLOM KANAN: ANIMASI GALERI BERJALAN */}
+          {/* KOLOM KANAN: ANIMASI GALERI BERJALAN MURNI */}
           <motion.div
             className="lg:col-span-5 flex justify-center relative h-[480px]"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -153,7 +126,6 @@ export const Hero: React.FC = () => {
                 maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
               }}
             >
-              {/* Track 1 (Kiri) */}
               <div className="flex-1 relative">
                 <motion.div
                   className="flex flex-col w-full"
@@ -164,7 +136,6 @@ export const Hero: React.FC = () => {
                 </motion.div>
               </div>
 
-              {/* Track 2 (Kanan) */}
               <div className="flex-1 relative">
                 <motion.div
                   className="flex flex-col w-full"
@@ -179,24 +150,61 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal / Lightbox Pop-up untuk Gambar Sertifikat */}
+      {/* --- NEW: FLOATING LIVE ACTIVITY WIDGET --- */}
+      <motion.a
+        href="/dashboard"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.6 }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 p-3 sm:pr-5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-700/60 rounded-full shadow-2xl cursor-pointer group hover:border-emerald-500/50 transition-colors duration-300"
+      >
+        {/* Animated Pulse Ring & Icon */}
+        <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 transition-colors">
+          <span className="absolute top-0 right-0 flex h-2.5 w-2.5 -mt-0.5 -mr-0.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span className="text-lg">💻</span>
+        </div>
+
+        {/* Text Info */}
+        <div className="flex flex-col mr-1">
+          <span className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none mb-1">
+            Live Activity
+          </span>
+          <span className="text-sm font-semibold text-slate-800 dark:text-slate-100 leading-none">
+            Membangun <span className="text-red-500 dark:text-red-400">webPorto</span>
+          </span>
+        </div>
+
+        {/* Expanding Arrow Icon on Hover */}
+        <motion.div 
+          initial={{ width: 0, opacity: 0 }}
+          animate={{ width: isHovered ? 'auto' : 0, opacity: isHovered ? 1 : 0 }}
+          className="overflow-hidden flex items-center"
+        >
+          <div className="pl-1">
+            <svg className="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </motion.div>
+      </motion.a>
+      {/* ---------------------------------------- */}
+
+      {/* Modal / Lightbox Pop-up */}
       {selectedImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-slate-900/80 backdrop-blur-sm animate-in fade-in"
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative max-w-4xl w-full flex justify-center" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-white hover:text-red-500 p-2 transition-colors"
-            >
+            <button onClick={() => setSelectedImage(null)} className="absolute -top-12 right-0 text-white hover:text-red-500 p-2 transition-colors">
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <img
-              src={selectedImage}
-              alt="Sertifikat"
-              className="w-full max-w-3xl h-auto rounded-xl shadow-2xl object-contain max-h-[85vh] bg-slate-800"
-            />
+            <img src={selectedImage} alt="Sertifikat" className="w-full max-w-3xl h-auto rounded-xl shadow-2xl object-contain max-h-[85vh] bg-slate-800" />
           </div>
         </div>
       )}
