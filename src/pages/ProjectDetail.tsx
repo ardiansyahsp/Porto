@@ -78,29 +78,20 @@ export default function ProjectDetail() {
           
           {/* KOLOM KIRI (Visual Utama - Sticky) */}
           <div className="lg:col-span-5 lg:sticky lg:top-28 z-10">
-            {/* Header ala Mac OS Mini untuk membingkai gambar */}
-            <div className="rounded-2xl overflow-hidden shadow-2xl border border-border dark:border-slate-800 bg-surface dark:bg-slate-800/50">
-              <div className="h-10 bg-slate-100 dark:bg-slate-900 border-b border-border dark:border-slate-800 flex items-center px-4 gap-2">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
+            {/* Tampilan Premium: Bersih tanpa header Mac OS & tanpa pemotongan (crop) gambar */}
+            <div className="rounded-2xl overflow-hidden shadow-2xl border border-border dark:border-slate-800 bg-white dark:bg-slate-800">
+              {project.featured_image ? (
+                <img 
+                  src={project.featured_image} 
+                  alt={project.title} 
+                  // w-full dan h-auto memastikan gambar tampil penuh sesuai proporsi aslinya tanpa dicrop
+                  className="w-full h-auto block"
+                />
+              ) : (
+                <div className="aspect-video w-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-muted">
+                  Tidak ada gambar
                 </div>
-              </div>
-              {/* Gambar Utama */}
-              <div className="aspect-[4/5] sm:aspect-square relative overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center p-4">
-                {project.featured_image ? (
-                  <img 
-                    src={project.featured_image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover rounded-lg shadow-sm"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center text-muted">
-                    Tidak ada gambar
-                  </div>
-                )}
-              </div>
+              )}
             </div>
           </div>
 
